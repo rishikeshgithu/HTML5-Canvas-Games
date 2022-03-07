@@ -59,7 +59,7 @@ function draw_mark(i, j, mark) {
     }
     case true: {
         ctx.beginPath();
-        ctx.arc(-ttt.a + i*ttt.a, -ttt.a + j*ttt.a, ttt.a / 2, 0, 2 * Math.PI);
+        ctx.arc(-ttt.a + i*ttt.a, ttt.a - j*ttt.a, ttt.a / 2, 0, 2 * Math.PI);
         ctx.stroke();
         break;
     }
