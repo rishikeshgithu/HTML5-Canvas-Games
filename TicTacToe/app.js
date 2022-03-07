@@ -17,7 +17,7 @@ let ttt = {
 for (let i = 0; i < 3; ++i) {
     let row = [];
     for (let j = 0; j < 3; ++j) {
-        row.push(true);
+        row.push(false);
     }
     ttt.marks.push(row);
 }
@@ -58,10 +58,18 @@ function draw_mark(i, j, mark) {
         break;
     }
     case true: {
+		ctx.beginPath();
+		ctx.arc((-ttt.a)+ttt.a*(i), (-ttt.a)+ttt.a*(j), (((ttt.a)/2)-1), 0, 2 * Math.PI);
+		ctx.stroke();
         // TODO: Draw O at i, j.
     }
     case false: {
-        // TODO: Draw X at i, j.
+		ctx.beginPath();
+		ctx.moveTo (((-ttt.a)*3/2)+(ttt.a*i),((ttt.a)*3/2)-(ttt.a*j));
+		ctx.lineTo (((-ttt.a)*1/2)+(ttt.a*i),((ttt.a)*1/2)-(ttt.a*j));
+		ctx.moveTo (((-ttt.a)*1/2)+(ttt.a*i),((ttt.a)*3/2)-(ttt.a*j));
+		ctx.lineTo (((-ttt.a)*3/2)+(ttt.a*i),((ttt.a)*1/2)-(ttt.a*j));
+		ctx.stroke();
     }
     }
 }
