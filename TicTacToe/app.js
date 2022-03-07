@@ -10,14 +10,15 @@ let ctx = null;
 //
 
 let ttt = {
-    a: 60,
+    a_cell: 60,
+    a_mark: 40,
     marks: [], // 3x3 array of null/true/false representing blank/knot/cross
 };
 
 for (let i = 0; i < 3; ++i) {
     let row = [];
     for (let j = 0; j < 3; ++j) {
-        row.push(true);
+        row.push(null);
     }
     ttt.marks.push(row);
 }
@@ -45,10 +46,10 @@ function redraw() {
 
 function draw_grid() {
     ctx.fillStyle = "black";
-    ctx.fillRect(-ttt.a/2 - 1, -3*ttt.a/2, 2, 3*ttt.a);
-    ctx.fillRect(ttt.a/2 - 1, -3*ttt.a/2, 2, 3*ttt.a);
-    ctx.fillRect(-3*ttt.a/2, -ttt.a/2 - 1, 3*ttt.a, 2);
-    ctx.fillRect(-3*ttt.a/2, ttt.a/2 - 1, 3*ttt.a, 2);
+    ctx.fillRect(-ttt.a_cell/2 - 1, -3*ttt.a_cell/2, 2, 3*ttt.a_cell);
+    ctx.fillRect(ttt.a_cell/2 - 1, -3*ttt.a_cell/2, 2, 3*ttt.a_cell);
+    ctx.fillRect(-3*ttt.a_cell/2, -ttt.a_cell/2 - 1, 3*ttt.a_cell, 2);
+    ctx.fillRect(-3*ttt.a_cell/2, ttt.a_cell/2 - 1, 3*ttt.a_cell, 2);
 }
 
 function draw_mark(i, j, mark) {
@@ -59,16 +60,16 @@ function draw_mark(i, j, mark) {
     }
     case true: {
         ctx.beginPath();
-        ctx.arc(-ttt.a + i*ttt.a, ttt.a - j*ttt.a, ttt.a / 2, 0, 2 * Math.PI);
+        ctx.arc(-ttt.a_cell + i*ttt.a_cell, ttt.a_cell - j*ttt.a_cell, ttt.a_cell / 2, 0, 2 * Math.PI);
         ctx.stroke();
         break;
     }
     case false: {
         ctx.beginPath();
-        ctx.moveTo(-(3*ttt.a/2) + i*ttt.a, ttt.a*3/2 - j*ttt.a);
-        ctx.lineTo(-(ttt.a/2) + i*ttt.a, ttt.a/2 - j*ttt.a);
-        ctx.moveTo(-(ttt.a/2) + i*ttt.a, 3*ttt.a/2 - j*ttt.a);
-        ctx.lineTo(-(3*ttt.a/2) + i*ttt.a, ttt.a/2 - j*ttt.a);
+        ctx.moveTo(-(3*ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell*3/2 - j*ttt.a_cell);
+        ctx.lineTo(-(ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell/2 - j*ttt.a_cell);
+        ctx.moveTo(-(ttt.a_cell/2) + i*ttt.a_cell, 3*ttt.a_cell/2 - j*ttt.a_cell);
+        ctx.lineTo(-(3*ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell/2 - j*ttt.a_cell);
         ctx.stroke();
         break;
     }
