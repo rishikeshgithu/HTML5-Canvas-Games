@@ -17,7 +17,7 @@ let ttt = {
 for (let i = 0; i < 3; ++i) {
     let row = [];
     for (let j = 0; j < 3; ++j) {
-        row.push(false);
+        row.push(true);
     }
     ttt.marks.push(row);
 }
@@ -58,18 +58,19 @@ function draw_mark(i, j, mark) {
         break;
     }
     case true: {
-		ctx.beginPath();
-		ctx.arc((-ttt.a)+ttt.a*(i), (-ttt.a)+ttt.a*(j), (((ttt.a)/2)-1), 0, 2 * Math.PI);
-		ctx.stroke();
-        // TODO: Draw O at i, j.
+        ctx.beginPath();
+        ctx.arc(-ttt.a + i*ttt.a, -ttt.a + j*ttt.a, ttt.a / 2, 0, 2 * Math.PI);
+        ctx.stroke();
+        break;
     }
     case false: {
-		ctx.beginPath();
-		ctx.moveTo (((-ttt.a)*3/2)+(ttt.a*i),((ttt.a)*3/2)-(ttt.a*j));
-		ctx.lineTo (((-ttt.a)*1/2)+(ttt.a*i),((ttt.a)*1/2)-(ttt.a*j));
-		ctx.moveTo (((-ttt.a)*1/2)+(ttt.a*i),((ttt.a)*3/2)-(ttt.a*j));
-		ctx.lineTo (((-ttt.a)*3/2)+(ttt.a*i),((ttt.a)*1/2)-(ttt.a*j));
-		ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-(3*ttt.a/2) + i*ttt.a, ttt.a*3/2 - j*ttt.a);
+        ctx.lineTo(-(ttt.a/2) + i*ttt.a, ttt.a/2 - j*ttt.a);
+        ctx.moveTo(-(ttt.a/2) + i*ttt.a, 3*ttt.a/2 - j*ttt.a);
+        ctx.lineTo(-(3*ttt.a/2) + i*ttt.a, ttt.a/2 - j*ttt.a);
+        ctx.stroke();
+        break;
     }
     }
 }
