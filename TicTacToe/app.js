@@ -54,22 +54,24 @@ function draw_grid() {
 
 function draw_mark(i, j, mark) {
     ctx.fillStyle = "blue";
+	let x = (i-1)*ttt.a_cell;
+	let y = (1-j)*ttt.a_cell;
     switch (mark) {
     case null: {
         break;
     }
     case true: {
         ctx.beginPath();
-        ctx.arc(-ttt.a_cell + i*ttt.a_cell, ttt.a_cell - j*ttt.a_cell, ttt.a_cell / 2, 0, 2 * Math.PI);
+        ctx.arc(x, y, ttt.a_mark / 2, 0, 2 * Math.PI);
         ctx.stroke();
         break;
     }
     case false: {
         ctx.beginPath();
-        ctx.moveTo(-(3*ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell*3/2 - j*ttt.a_cell);
-        ctx.lineTo(-(ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell/2 - j*ttt.a_cell);
-        ctx.moveTo(-(ttt.a_cell/2) + i*ttt.a_cell, 3*ttt.a_cell/2 - j*ttt.a_cell);
-        ctx.lineTo(-(3*ttt.a_cell/2) + i*ttt.a_cell, ttt.a_cell/2 - j*ttt.a_cell);
+		ctx.moveTo(x-ttt.a_mark/2, y+ttt.a_mark/2);
+		ctx.lineTo(x+ttt.a_mark/2, y-ttt.a_mark/2);
+		ctx.moveTo(x-ttt.a_mark/2, y-ttt.a_mark/2);
+		ctx.lineTo(x+ttt.a_mark/2, y+ttt.a_mark/2);
         ctx.stroke();
         break;
     }
