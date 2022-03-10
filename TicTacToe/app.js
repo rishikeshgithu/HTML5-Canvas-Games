@@ -31,8 +31,9 @@ for (let i = 0; i < 3; ++i) {
 //
 
 function redraw() {
-    let w = ctx.canvas.width;
-    let h = ctx.canvas.height;
+    ctx.save();
+    const w = ctx.canvas.width;
+    const h = ctx.canvas.height;
     ctx.translate(w/2, h/2);
     ctx.scale(1, -1);
     draw_grid();
@@ -42,6 +43,7 @@ function redraw() {
             draw_mark(i, j, row[j]);
         }
     }
+    ctx.restore();
 }
 
 function draw_grid() {
@@ -80,6 +82,56 @@ function draw_mark(i, j, mark) {
 
 
 //
+// handle_click
+// handle_click_cell
+//
+
+function handle_click(mx, my) {
+    for (let i = 0; i < 3; ++i) {
+        let x = (i-1)*ttt.a_cell;
+        let left = x - ttt.a_cell/2;
+        let right = x + ttt.a_cell/2;
+        if (mx < left || mx > right) {
+            continue;
+        }
+        for (let j = 0; j < 3; ++j) {
+            let y = (1-j)*ttt.a_cell;
+            let bottom = y - ttt.a_cell/2;
+            let top = y + ttt.a_cell/2;
+            if (my < bottom || my > top) {
+                continue;
+            }
+            handle_click_cell(i, j);
+            return;
+        }
+    }
+}
+
+function compute_n_marks() {
+    let n_marks = 0;
+    for (let i = 0; i < 3; ++i) {
+        let row = ttt.marks[i];
+        for (let j = 0; j < 3; ++j) {
+            if (row[j] !== null) {
+                n_marks += 1;
+            }
+        }
+    }
+    return n_marks;
+}
+
+function handle_click_cell(i, j) {
+    if (ttt.marks[i][j] !== null) {
+        return;
+    }
+    let n_marks = compute_n_marks();
+    let mark = n_marks % 2 !== 0;
+    ttt.marks[i][j] = mark;
+    redraw();
+}
+
+
+//
 // DOMContentLoaded
 // _on_resize
 //
@@ -103,8 +155,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     redraw();
 
-    ctx.canvas.addEventListener("mousemove", (event) => {
-    });
     ctx.canvas.addEventListener("click", (event) => {
+        const w = ctx.canvas.width;
+        const h = ctx.canvas.height;
+        let x = event.offsetX;
+        let y = event.offsetY;
+        x -= w/2;
+        y -= h/2;
+        y = -y;
+        handle_click(x, y);
     });
 });
