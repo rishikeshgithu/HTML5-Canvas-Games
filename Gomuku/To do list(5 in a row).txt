@@ -4,5 +4,5 @@ Java script(html)
 
 1)Create 9*9 line in a huge box.
 2)Create a program to draw blue and red circle when clicked.
-3)Now modify the program to draw the circle inside the square(point 1).
+3)Now modify the program to draw the circle inside the square -->(point 1).
 4)Find when same color circle's come in row,column or diagonal then print the color's circle won the game.
