@@ -1,8 +1,8 @@
 Java script( html )
 
-#How to make HTML and javascript file.
+#How to make HTML and javascript files.
 
 1)Create 9*9 grids.
-2)Create a program to draw blue and red circle when clicked.
+2)Create a program to draw blue and red circles when clicked.
 3)Now modify the program to draw the circle inside the square -->(point 1).
-4)Find when same color circles come in row, column or diagonal then print that which player won the game.
+4)Find when the same color circles come in a row, column or diagonal then print which player won the game.
